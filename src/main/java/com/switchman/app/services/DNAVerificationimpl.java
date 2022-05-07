@@ -1,9 +1,15 @@
 package com.switchman.app.services;
-import com.switchman.app.services.DNAVerificationService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.switchman.app.repositories.DNARepository;
+
+@Service
 public class DNAVerificationimpl implements DNAVerificationService {
     
-	
+	@Autowired
+	public DNARepository dnaRepo;
 	
 	
 	
