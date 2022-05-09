@@ -1,5 +1,6 @@
 package com.switchman.app.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,15 +13,20 @@ import com.switchman.app.services.DNAVerificationService;
 @RequestMapping("/mutant/")
 public class MutantController   {
 	
-	private DNAVerificationService dnaverification;
+	private DNAVerificationService dnaVerification;
 	
 	
-	
+	@Autowired
+	public MutantController(DNAVerificationService dnaVerification) {
+		this.dnaVerification = dnaVerification;
+	}
 	
 	
 	@PostMapping("")
-	public void sendDNA (@RequestBody DNA dna) {
+	public boolean sendDNA (@RequestBody String[] dna) {
+		return dnaVerification.isMutant(dna);
 	}
+	
 	
 
 }
