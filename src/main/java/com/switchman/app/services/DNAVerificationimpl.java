@@ -1,18 +1,16 @@
 package com.switchman.app.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import com.switchman.app.repositories.DNARepository;
+import com.switchman.app.services.DNAVerificationService;
 
-@Service
+ @Service
 public class DNAVerificationimpl implements DNAVerificationService {
-    
-	@Autowired
-	public DNARepository dnaRepo;
+
 	
 	
-	
+	 @Override
 	 public boolean isMutant(String[] dna) {
 
     return mutantPerLine(dna) + mutantPerColumn(dna) + mutantPerDiagonal(dna) + mutantPerContraDiagonal(dna) >= 2;
