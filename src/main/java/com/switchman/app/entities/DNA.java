@@ -18,10 +18,19 @@ public class DNA {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String dnaInformation;
+	private String[] dnaInformation;
 	
 	private boolean isMutant; 
-	
+
+	public void Dna() {
+	    }
+
+	    public void Dna(String[] dnaInformation) {
+
+	        this.dnaInformation = dnaInformation;
+	     
+	    }
+
 	
 	
 	

@@ -1,5 +1,4 @@
 package com.switchman.app.services;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -7,6 +6,7 @@ public class DNAVerificationimpl implements DNAVerificationService {
 
 	
 	public boolean isMutant(String[] dna) {
+
 
 		return mutantPerLine(dna) + mutantPerColumn(dna) + mutantPerDiagonal(dna) + mutantPerContraDiagonal(dna) >= 2;
 	}
