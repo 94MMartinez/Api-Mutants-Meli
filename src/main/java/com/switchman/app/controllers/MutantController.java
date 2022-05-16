@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,23 +28,16 @@ public class MutantController   {
 	
 	@PostMapping
 	public ResponseEntity<Object> isMutant(@RequestBody @Valid DnaInformationDTO dna) {
-		HttpStatus status;
-		String body;
 		try {
 			Boolean isMutant = dnaVerification.isMutant(dna.getDna());
 			if (isMutant) {
-				status = HttpStatus.OK;
-				body = "{\"message\": \"Welcome Brother Mutant\"}";
+				return ResponseEntity.status(HttpStatus.OK).body("Welcome Brother Mutant!");
 			} else {
-				status = HttpStatus.FORBIDDEN;
-				body = "{\"message\": \"Ya Filthy Human!!\"}";
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("YA FILTHY HUMAN!!");
 			}
 		} catch (IllegalArgumentException e) {
-			status = HttpStatus.BAD_REQUEST;
-			body = e.getMessage();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		
-		return ResponseEntity.status(status)
-				.contentType(MediaType.APPLICATION_JSON).body(body);
+			
 	}
 }
