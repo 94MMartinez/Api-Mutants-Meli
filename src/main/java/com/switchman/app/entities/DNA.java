@@ -1,9 +1,16 @@
 package com.switchman.app.entities;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,26 +19,31 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class DNA {
-	
+@Table(name = "dna_bd")
+public class DNA implements Serializable{
+
+	@Serial
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	private String[] dnaInformation;
-	
-	private boolean isMutant; 
+	@Column(name = "id")
+	private Long id;
+
+	@Column(name = "dnaInformation")
+	@NotNull
+	private String dnaInformation;
+
+	@Column(name = "isMutant")
+	private boolean isMutant;
 
 	public void Dna() {
-	    }
+	}
 
-	    public void Dna(String[] dnaInformation) {
+	public void Dna(String dnaInformation) {
 
-	        this.dnaInformation = dnaInformation;
-	     
-	    }
+		this.dnaInformation = dnaInformation;
 
-	
-	
-	
+	}
+
 }

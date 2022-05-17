@@ -1,26 +1,21 @@
 package com.switchman.app.services;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class DNAVerificationimpl implements DNAVerificationService {
 
-	
 	public boolean isMutant(String[] dna) {
-
-
-		return mutantPerLine(dna) + mutantPerColumn(dna) + mutantPerDiagonal(dna) + mutantPerContraDiagonal(dna) >= 2;
+		return mutantPerLine(dna) + mutantPerColumn(dna) 
+		+ mutantPerDiagonal(dna) + mutantPerContraDiagonal(dna) >= 2;
 	}
 
-	
-	
-	
 	private int mutantPerContraDiagonal(String[] dna) {
-		
 		if (dna.length == 0) {
 			return 0;
 		}
-		
 		int someDiagonalMutant = 0;
+
 		for (int actualRow = 0; actualRow < dna.length && ((dna.length - actualRow) >= 4); actualRow++) {
 			int letterEquals = 0;
 			int rowToCompare = actualRow + 1;
@@ -50,8 +45,6 @@ public class DNAVerificationimpl implements DNAVerificationService {
 		return someDiagonalMutant;
 	}
 
-	
-	
 	private int mutantPerDiagonal(String[] dna) {
 		if (dna.length == 0) {
 			return 0;
@@ -83,7 +76,6 @@ public class DNAVerificationimpl implements DNAVerificationService {
 		return someDiagonalMutant;
 	}
 
-	
 	private int mutantPerLine(String[] dna) {
 		if (dna.length == 0) {
 			return 0;
@@ -111,7 +103,6 @@ public class DNAVerificationimpl implements DNAVerificationService {
 		return someLineMutant;
 	}
 
-	
 	private int mutantPerColumn(String[] dna) {
 		if (dna.length == 0) {
 			return 0;

@@ -3,7 +3,6 @@ package com.switchman.app.dto;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 
-
 public class DnaInformationDTO {
 
 	@NotNull
@@ -24,12 +23,9 @@ public class DnaInformationDTO {
 		this.dna = dna;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "DnaInformationDTO{" +
-				"dna=" + Arrays.toString(dna) +
-				'}';
+		return "DnaInformationDTO{" + "dna=" + Arrays.toString(dna) + '}';
 	}
+
 }
