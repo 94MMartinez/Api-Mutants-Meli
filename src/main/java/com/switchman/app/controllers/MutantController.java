@@ -1,5 +1,7 @@
 package com.switchman.app.controllers;
 
+import java.util.Arrays;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +13,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.switchman.app.dto.DnaInformationDTO;
+import com.switchman.app.entities.DNA;
 import com.switchman.app.services.DNAVerificationService;
+import com.switchman.app.services.StatsImpl;
 
 @RestController
 @RequestMapping(path = "/mutant")
-public class MutantController   {
-	
+public class MutantController {
+
 	private DNAVerificationService dnaVerification;
-	
-	
+
+	@Autowired
+	private StatsImpl statsService;
+
 	@Autowired
 	public MutantController(DNAVerificationService dnaVerification) {
 		this.dnaVerification = dnaVerification;
 	}
-	
-	
+
 	@PostMapping
 	public ResponseEntity<Object> isMutant(@RequestBody @Valid DnaInformationDTO dna) {
 		try {
+
 			Boolean isMutant = dnaVerification.isMutant(dna.getDna());
+			saveDNA(dna, isMutant);
 			if (isMutant) {
 				return ResponseEntity.status(HttpStatus.OK).body("Welcome Brother Mutant!");
 			} else {
@@ -38,6 +45,12 @@ public class MutantController   {
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-			
+		//// return Response.status(isMutant ? SC_OK :
+		//// SC_FORBIDDEN).entity("{}").build();
 	}
+
+	protected void saveDNA(DnaInformationDTO dna, boolean isMutant) {
+		statsService.saveDNA(new DNAToBd().transformerDNADtoToDNA(dna, isMutant));
+	}
+
 }
