@@ -113,7 +113,7 @@ public class DNAVerificationimpl implements DNAVerificationService {
 			int rowToCompare = actualRow + 1;
 			int letterEquals = 0;
 			int actualColumn = 0;
-			for (int j = 0; actualColumn < dna.length; j++) {
+			for (int j = 0; actualColumn < dna[0].length(); j++) {
 				if (dna[actualRow].charAt(actualColumn) != dna[rowToCompare].charAt(actualColumn)) {
 					letterEquals = 0;
 					actualColumn += 1;

@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Table(name = "dna_bd")
-public class DNA implements Serializable{
+public class DNA implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
@@ -30,11 +30,11 @@ public class DNA implements Serializable{
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "dnaInformation")
+	@Column(name = "dnainformation")
 	@NotNull
 	private String dnaInformation;
 
-	@Column(name = "isMutant")
+	@Column(name = "ismutant")
 	private boolean isMutant;
 
 	public void Dna() {
@@ -45,5 +45,6 @@ public class DNA implements Serializable{
 		this.dnaInformation = dnaInformation;
 
 	}
+
 
 }

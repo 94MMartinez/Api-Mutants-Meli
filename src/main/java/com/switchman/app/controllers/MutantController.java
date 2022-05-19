@@ -17,6 +17,7 @@ import com.switchman.app.entities.DNA;
 import com.switchman.app.services.DNAVerificationService;
 import com.switchman.app.services.StatsImpl;
 
+
 @RestController
 @RequestMapping(path = "/mutant")
 public class MutantController {
@@ -34,23 +35,23 @@ public class MutantController {
 	@PostMapping
 	public ResponseEntity<Object> isMutant(@RequestBody @Valid DnaInformationDTO dna) {
 		try {
-
-			Boolean isMutant = dnaVerification.isMutant(dna.getDna());
+			Boolean isMutant = dnaVerification.isMutant(dna.getDna());			
 			saveDNA(dna, isMutant);
-			if (isMutant) {
-				return ResponseEntity.status(HttpStatus.OK).body("Welcome Brother Mutant!");
+			if (isMutant)  {
+				return  ResponseEntity.status(HttpStatus.OK).body("Welcome Brother Mutant!");
 			} else {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("YA FILTHY HUMAN!!");
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("YA FILTHY HUMAN!!");				
 			}
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		//// return Response.status(isMutant ? SC_OK :
-		//// SC_FORBIDDEN).entity("{}").build();
 	}
 
 	protected void saveDNA(DnaInformationDTO dna, boolean isMutant) {
+		DNA dnaIsinRepo = statsService.findBydnaInformation(Arrays.toString(dna.getDna()));
+		if(dnaIsinRepo == null) {
 		statsService.saveDNA(new DNAToBd().transformerDNADtoToDNA(dna, isMutant));
+		}
 	}
 
 }
