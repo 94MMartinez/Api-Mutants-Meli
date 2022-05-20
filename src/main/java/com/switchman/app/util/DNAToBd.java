@@ -1,4 +1,4 @@
-package com.switchman.app.controllers;
+package com.switchman.app.util;
 
 import java.util.Arrays;
 

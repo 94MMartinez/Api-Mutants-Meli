@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 public class DNAVerificationimpl implements DNAVerificationService {
 
 	public boolean isMutant(String[] dna) {
-		return mutantPerLine(dna) + mutantPerColumn(dna) 
-		+ mutantPerDiagonal(dna) + mutantPerContraDiagonal(dna) >= 2;
+		return mutantPerLine(dna) + mutantPerColumn(dna) + mutantPerDiagonal(dna) + mutantPerContraDiagonal(dna) >= 2;
 	}
 
 	private int mutantPerContraDiagonal(String[] dna) {
